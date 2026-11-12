@@ -1,15 +1,15 @@
-############################## ############################## #####
-##         Set up file                            ##
-## ------------------------------ ---------------------------    ##
-##| Editor | Version |    Date    |       Comments          |   ##
-## ------------------------------ ---------------------------    ##
-##   ALee      1.0      10/05/18    Created                     ##
-##   ALee      1.1      21/05/18    bluepy                      ##
-##   ALee   1.2 01/02/21    add vim                     ##
-##   TRW   1.3 09/02/25    Add auto Y                  ##
-##   ALEE   1.4 09/02/25    Add Run Auxillary Scripts   ##
-##                                            ##
- ############################# ############################## ######
+#################################################################
+##         Set up file                            ##
+## ---------------------------------------------------------    ##
+##| Editor | Version |    Date    |       Comments          |   ##
+## ---------------------------------------------------------    ##
+##   ALee      1.0      10/05/18    Created                     ##
+##   ALee      1.1      21/05/18    bluepy                      ##
+##   ALee   1.2 01/02/21    add vim                     ##
+##   TRW   1.3 09/02/25    Add auto Y                  ##
+##   ALEE   1.4 09/02/25    Add Run Auxillary Scripts   ##
+##                                            ##
+ #################################################################
 
 
 #!/bin/bash
@@ -26,7 +26,7 @@ echo "Configure internet connection"
 #
 #if[wirelessconnection=1]
 #then
-#https://unix.stackexchange. com/questions/92799/ connecting-to-wifi-network- through-command-line
+#https://unix.stackexchange.com/questions/92799/connecting-to-wifi-network-through-command-line
 # sudo dhclient wlan0
 # ##nmcli dev wifi connect $ssid password $password
 #
@@ -39,13 +39,13 @@ echo "Installing software and updates"
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
-sudo apt-get install -y vim                    # install the vim text editor
-sudo apt-get install -y git                    # install git repo
-sudo apt-get install -y gcc                    # install c/c++ compiler
-sudo apt-get install -y wiringpi               # Allows for GPIO control
-sudo apt-get install -y i2c-tools              # install i2c tools
-sudo apt-get install -y openssl                 # Install OpenSSL for iuse with security cert and keys
-sudo apt install -y npm nodejs                  # Install npm and nodejs (dependancies for node red)
+sudo apt-get install -y vim                    # install the vim text editor
+sudo apt-get install -y git                    # install git repo
+sudo apt-get install -y gcc                    # install c/c++ compiler
+sudo apt-get install -y wiringpi               # Allows for GPIO control
+sudo apt-get install -y i2c-tools              # install i2c tools
+sudo apt-get install -y openssl                 # Install OpenSSL for iuse with security cert and keys
+sudo apt install -y npm nodejs                  # Install npm and nodejs (dependancies for node red)
 
 # QR code generator tool and pre-requisite packages
 sudo apt-get install -y qrencode
@@ -56,61 +56,61 @@ sudo apt-get install -y libtool
 sudo apt-get install -y pkg-config
 sudo apt-get install -y libpng-dev
 
-sudo apt-get install  -y nmap  # SSH
-sudo apt-get install  -y xrdp  # Remote PC
-sudo apt-get install  -y nmcli # Command-line tool for controlling NetworkManager
+sudo apt-get install  -y nmap  # SSH
+sudo apt-get install  -y xrdp  # Remote PC
+sudo apt-get install  -y nmcli # Command-line tool for controlling NetworkManager
 
 sudo apt-get install -y python
 sudo apt-get install -y mysql-server
 sudo apt-get install -y npm i bluetoothctl
-sudo apt-get install -y bluez                 #Bluetooth libraries
-sudo apt-get install -y bluez-utils           #Bluetooth controls
+sudo apt-get install -y bluez                 #Bluetooth libraries
+sudo apt-get install -y bluez-utils           #Bluetooth controls
 sudo apt-get install -y python-pip
 sudo apt-get install -y libglib2.0-dev
 sudo pip install -y bluepy
 
-sudo pip     install  pygatt                                     #Bluetooth GATT protocol python Library
-sudo pip     install  "pygatt[GATTTOOL]"                     #Library relative to script being ran
-sudo pip     install  git+https://github.com/ peplin/pygatt      #Library relative to script being ran
-sudo -E pip  install  pexpect                               #Library relative to script being ran
+sudo pip     install  pygatt                                     #Bluetooth GATT protocol python Library
+sudo pip     install  "pygatt[GATTTOOL]"                     #Library relative to script being ran
+sudo pip     install  git+https://github.com/peplin/pygatt      #Library relative to script being ran
+sudo -E pip  install  pexpect                               #Library relative to script being ran
 
 
 ## Installing Wireguard
- #sudo apt-get install wireguard wireguard-tools
- # Follow steps here to configure youre server https://docs.pi-hole.net/ guides/vpn/wireguard/server/
+ #sudo apt-get install wireguard wireguard-tools
+ # Follow steps here to configure youre server https://docs.pi-hole.net/guides/vpn/wireguard/server/
 
 # Running system Config Scripts to enable features.
 # Comment out if you do not wish to enable any of the following
-    #Install Mosquitto MQTT Broker
-     sh ./RPISetup/system_setup/ mosquitto_install.sh
-     mosquitto -v         # Run this command to check MQTT version
-     # netstat -a
+    #Install Mosquitto MQTT Broker
+     sh ./RPISetup/system_setup/mosquitto_install.sh
+     mosquitto -v         # Run this command to check MQTT version
+     # netstat -a
 
-    ## Installing nodeRed
-    ## Source for repo https://nodered.org/docs/ getting-started/raspberrypi
-    # bash <(curl -sL https://github.com/node-red/ linux-installers/releases/ latest/download/install- update-nodered-deb)
-    #
-    # edit: 10 nov 26 running into javascript memory heap issue try this:
-    echo "installing npm"
-    sudo apt-get install -y npm
-    echo "setting node memory limit for 32-bit ARM"
-    export NODE_OPTIONS="--max-old-space- size=1024"
-    echo "installing Node-RED"
-    sudo -E npm install -g --unsafe-perm node-red
+    ## Installing nodeRed
+    ## Source for repo https://nodered.org/docs/getting-started/raspberrypi
+    # bash <(curl -sL https://github.com/node-red/linux-installers/releases/latest/download/install-update-nodered-deb)
+    #
+    # edit: 10 nov 26 running into javascript memory heap issue try this:
+    echo "installing npm"
+    sudo apt-get install -y npm
+    echo "setting node memory limit for 32-bit ARM"
+    export NODE_OPTIONS="--max-old-space-size=1024"
+    echo "installing Node-RED"
+    sudo -E npm install -g --unsafe-perm node-red
 
-    #check everything is installed
-    echo "Node Version:"
-    node --version
-    echo "NPM version:"
-    npm --version
-    echo "Node Red Version:"
-    node-red --version
+    #check everything is installed
+    echo "Node Version:"
+    node --version
+    echo "NPM version:"
+    npm --version
+    echo "Node Red Version:"
+    node-red --version
 
-    # edit: 12 nov 26 npm install doesn't create a service, and the export above
-    # doesn't reach it - create nodered.service with the memory limit built in
-    echo "creating nodered.service"
-    NODERED_BIN=$(command -v node-red)
-sudo tee /etc/systemd/system/nodered. service > /dev/null <<EOF
+    # edit: 12 nov 26 npm install doesn't create a service, and the export above
+    # doesn't reach it - create nodered.service with the memory limit built in
+    echo "creating nodered.service"
+    NODERED_BIN=$(command -v node-red)
+sudo tee /etc/systemd/system/nodered.service > /dev/null <<EOF
 [Unit]
 Description=Node-RED
 After=network.target
@@ -119,7 +119,7 @@ After=network.target
 Type=simple
 User=$USER
 WorkingDirectory=/home/$USER
-Environment="NODE_OPTIONS=-- max_old_space_size=1024"
+Environment="NODE_OPTIONS=--max_old_space_size=1024"
 ExecStart=$NODERED_BIN
 Restart=on-failure
 
@@ -127,13 +127,13 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF
 
-    # Install NodeRed for RPI
-    sudo systemctl daemon-reload
-    sudo systemctl enable nodered.service                  # Ensures Nodered runs on startup
-    sudo systemctl start nodered.service
+    # Install NodeRed for RPI
+    sudo systemctl daemon-reload
+    sudo systemctl enable nodered.service                  # Ensures Nodered runs on startup
+    sudo systemctl start nodered.service
 
-    #Configure i2C
-    sh ./RPISetup/system_setup/i2c_ enabling.sh
+    #Configure i2C
+    sh ./RPISetup/system_setup/i2c_enabling.sh
 
-    #Configure SSH
-    sh ./RPISetup/system_setup/ssh_ enabling.sh
+    #Configure SSH
+    sh ./RPISetup/system_setup/ssh_enabling.sh
