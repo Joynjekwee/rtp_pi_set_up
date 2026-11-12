@@ -93,6 +93,24 @@ sudo -E pip  install  pexpect                               #Library relative to
     # edit: 10 nov 26 running into javascript memory heap issue try this:
     echo "installing npm"
     sudo apt-get install -y npm
+
+    # edit: 12 nov 26 apt only gives Node 18, latest Node-RED needs Node 22.9+
+    # download Node 22 from nodejs.org into /usr/local (takes priority over apt's node)
+    echo "installing Node.js 22"
+    case "$(dpkg --print-architecture)" in
+      armhf) NODE_ARCH=armv7l ;;
+      arm64) NODE_ARCH=arm64 ;;
+      amd64) NODE_ARCH=x64 ;;
+      *)     NODE_ARCH="" ;;
+    esac
+    if [ -n "$NODE_ARCH" ]; then
+      NODE_DIST=https://nodejs.org/dist/latest-v22.x
+      NODE_FILE=$(curl -fsSL $NODE_DIST/SHASUMS256.txt | grep "linux-$NODE_ARCH.tar.xz" | awk '{print $2}')
+      curl -fsSL $NODE_DIST/$NODE_FILE | sudo tar -xJ -C /usr/local --strip-components=1
+      hash -r   # make the shell pick up the new node/npm
+    else
+      echo "WARNING: no Node 22 build for $(dpkg --print-architecture) - staying on apt's Node"
+    fi
     echo "setting node memory limit for 32-bit ARM"
     export NODE_OPTIONS="--max-old-space-size=1024"
     echo "installing Node-RED"
